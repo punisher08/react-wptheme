@@ -1,0 +1,94 @@
+/* Tailwind or custom CSS for this block */
+.block-banner{
+    background-size: cover;
+    background-position: center;
+    position:relative;
+}
+/* .block-banner */
+.block-banner .buttons{
+    position:relative;
+    z-index: 99;
+}
+.block-banner .card .description{
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(12px, 2vw, 1.125rem);
+    color: #000;
+}
+@media (max-width:768px){
+    .block-banner .card svg{
+        height: 50px;
+        width: 50px;
+    }
+    .block-banner .card h2{
+        line-height: normal;
+    }
+}
+.block-banner .card h2{
+    margin-bottom: 0px;
+    font-size:clamp(15px,2.344vw,22px);
+}
+.block-banner .card{
+    width: 400px;
+    border-radius: 15px;
+     font-family: "DM Sans", sans-serif;
+}
+@media (max-width:768px){
+    .block-banner .card{
+        width: 70%;
+    }
+    .block-banner .card .card-content{
+        padding:10px;
+        gap: 5px;
+    }
+    
+}
+.block-banner .image{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 50px;
+}
+@media (max-width:768px){
+    .block-banner .image{
+        height:280%;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 0px;
+    }
+}
+.block-banner .paragraph{
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    color: #b3b2b2;
+}
+.block-banner .subheading{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+}
+.block-banner .content h1 {
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: #fff;
+    margin-bottom: 1rem;
+    font-family: "Outfit", sans-serif;
+    line-height: clamp(2.875rem, 5vw, 4.75rem);
+}
+.block-banner .main{
+   min-height:761px;
+}
+.block-banner .floating {
+    /* position:relative; */
+    overflow: hidden;
+}
+@media (max-width:768px){
+   .block-banner .floating {
+    display:none;
+   } 
+}
+.block-banner .floating .box{
+    transform: rotate(-52deg);
+    position: absolute;
+    top: -79px;
+    right:0px;
+    height: 200px;
+    background-color: #192033;
+}

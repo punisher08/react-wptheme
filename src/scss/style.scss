@@ -1,0 +1,79 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@import 'typography.scss';
+@import 'header.scss';
+@import './blocks/banner.scss';
+
+.outfit{
+    font-family: "Outfit", sans-serif;
+}
+.jakarta{
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+.dm-sans{
+    font-family: "DM Sans", sans-serif;
+    line-height: normal;
+}
+body {
+   font-family: "DM Sans", sans-serif;
+   font-size: var(--fs-base);
+   line-height: var(--lh-normal);
+}
+
+/* Responsive heading sizes */
+h1 { @include heading-xl; }
+h2 { @include heading-lg; }
+h3 { @include heading-md; }
+h4 { @include heading-sm; }
+h5 { @include heading-xs; }
+h6 { @include text-lg; }
+
+p {
+   font-size: var(--fs-base);
+   line-height: var(--lh-relaxed);
+}
+
+.btn-primary{
+    background-color: #FFB400;
+    color: #000;
+    font-size: 16px;
+    padding: 5px 2px 5px 40px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    border-radius: 100px;
+}
+.btn-primary:hover{
+    background-color: #FFF;
+}
+.btn-secondary{
+    background-color: #FFF;
+    color: #000;
+    font-size: 16px;
+    padding: 5px 2px 5px 40px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    border-radius: 100px;
+}
+.btn-secondary:hover{
+    background-color: #FFB400;
+    color: #FFF;
+}
+@media (max-width: 768px) {
+ .btn-secondary,.btn-primary{
+    padding: 5px 2px 5px 20px;
+    font-size: 14px;
+ }
+ .btn-secondary svg, .btn-primary svg{
+    width: 30px;
+    height: 30px;
+ }
+}
+html {
+  scroll-behavior: smooth;
+}
+

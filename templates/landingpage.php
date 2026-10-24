@@ -1,0 +1,5 @@
+<?php
+/**
+ * Landing Page Template
+ */
+?>

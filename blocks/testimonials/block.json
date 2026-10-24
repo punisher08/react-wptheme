@@ -1,0 +1,16 @@
+{
+  "name": "acf/testimonials",
+  "title": "Testimonials",
+  "description": "A custom testimonials block",
+  "category": "layout",
+  "icon": "admin-customizer",
+  "keywords": ["testimonials"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  }
+}

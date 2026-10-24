@@ -1,0 +1,75 @@
+/* Tailwind or custom CSS for this block */
+#contact-block .contact-form input:not([type="submit"]){
+    background-color: white;
+}
+#contact-block .contact-form input{
+    height: 72px;
+    width: 100%;
+    
+    border-radius: 50px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    padding: 5px 24px;
+   
+}
+ #contact-block .contact-form input[type="submit"]{
+    background-color: #FFB400;
+    margin-top: 40px;
+ }
+#contact-block .contact-form textarea{
+    height: 142px;
+    width: 100%;
+    background-color: white;
+    border-radius: 15px; 
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    padding: 10px 24px;
+}
+#contact-block .contact-form form {
+    padding: 20px;
+}
+@media  (max-width:768px){
+    #contact-block .contact-form form {
+        padding: 0px;
+    }  
+    #contact-block .contact-form input{
+        height: 50px;
+        /* padding: 10px; */
+    }
+}
+#contact-block .contact-form label{
+    color: white;
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+#contact-block .contact-form button{
+    background-color: #FFB400;
+    color: #000;
+    font-size: 18px;
+    /* padding: 5px 2px 5px 40px; */
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    border-radius: 100px;
+    height: 60px;
+    /*  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 25px 2px 25px 30px;
+    margin-top: 40px;
+}
+#contact-block .contact-form button:hover{
+     background-color: #FFB400 !important;
+     color:white;
+}
+
+#contact-block form{
+    display: grid;
+    align-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+}

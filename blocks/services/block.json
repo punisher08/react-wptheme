@@ -1,0 +1,16 @@
+{
+  "name": "acf/services",
+  "title": "Services",
+  "description": "A custom services block",
+  "category": "layout",
+  "icon": "admin-customizer",
+  "keywords": ["services"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  }
+}
