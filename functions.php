@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'PROWPDEV_THEME_PATH', get_template_directory() );
 define( 'PROWPDEV_THEME_URL', get_template_directory_uri() );
 
+require_once PROWPDEV_THEME_PATH . '/includes/contact-api.php';
+
 function prowpdev() {
     // Theme supports
     add_theme_support('title-tag');

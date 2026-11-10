@@ -1,8 +1,54 @@
 import { useState } from "react";
+import axios from "axios";
 import { Arrow, Heading } from "./FrontpageUi";
 
-export default function ContactSection() {
+const defaultFields = [
+  { name: "name", label: "Your name", type: "text", required: true, placeholder: "Full name", autoComplete: "name" },
+  { name: "email", label: "Email address", type: "email", required: true, placeholder: "you@example.com", autoComplete: "email" },
+  {
+    name: "service",
+    label: "What can we help you with?",
+    type: "select",
+    required: false,
+    options: [
+      { label: "Landing page design", value: "Landing page design" },
+      { label: "Custom website development", value: "Custom website development" },
+      { label: "SEO optimization", value: "SEO optimization" },
+      { label: "Website maintenance and support", value: "Website maintenance and support" },
+      { label: "Other project", value: "Other project" },
+    ],
+  },
+  { name: "message", label: "Tell us about your project", type: "textarea", required: true, rows: 5, placeholder: "What are you looking to build or improve?" },
+];
+
+export default function ContactSection({ fields = defaultFields, endpoint = "/wp-json/prowptheme/v1/contact" }) {
   const [formSent, setFormSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setFormError("");
+
+    const formData = new FormData(event.currentTarget);
+    const values = Object.fromEntries(formData.entries());
+
+    try {
+      await axios.post(endpoint, values, {
+        headers: { "Content-Type": "application/json" },
+      });
+      setFormSent(true);
+    } catch (error) {
+      setFormError(
+        error.response?.data?.message ||
+        "We couldn't send your message. Please try again or email us directly."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
       <section id="contact" className="scroll-mt-20 py-20 sm:py-24">
         <div className="mx-auto grid max-w-[1240px] gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-12">
@@ -71,8 +117,7 @@ export default function ContactSection() {
                   Thanks for reaching out!
                 </h3>
                 <p className="mt-3 text-sm leading-6 text-slate-600">
-                  This is a front-end demo. Connect the form to WordPress,
-                  email, or your CRM to receive real enquiries.
+                  Your message has been sent. We’ll be in touch soon.
                 </p>
                 <button
                   type="button"
@@ -83,12 +128,17 @@ export default function ContactSection() {
                 </button>
               </div>
             ) : (
-              <form
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  setFormSent(true);
-                }}
-              >
+              <form onSubmit={handleSubmit}>
+                <div className="absolute left-[-9999px]" aria-hidden="true">
+                  <label htmlFor="contact-website">Leave this field empty</label>
+                  <input
+                    id="contact-website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-600">
                   Message us
                 </p>
@@ -100,78 +150,65 @@ export default function ContactSection() {
                 </p>
 
                 <div className="mt-7 grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="contact-name" className="mb-2 block text-xs font-semibold text-slate-700">
-                      Your name *
-                    </label>
-                    <input
-                      id="contact-name"
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      required
-                      placeholder="Full name"
-                      className="form-input"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-email" className="mb-2 block text-xs font-semibold text-slate-700">
-                      Email address *
-                    </label>
-                    <input
-                      id="contact-email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      placeholder="you@example.com"
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label htmlFor="contact-service" className="mb-2 block text-xs font-semibold text-slate-700">
-                      What can we help you with?
-                    </label>
-                    <select
-                      id="contact-service"
-                      name="service"
-                      defaultValue=""
-                      className="form-input"
+                  {fields.map((field) => (
+                    <div
+                      key={field.name}
+                      className={field.type === "text" || field.type === "email" ? "" : "sm:col-span-2"}
                     >
-                      <option value="" disabled>
-                        Select a service
-                      </option>
-                      <option>Landing page design</option>
-                      <option>Custom website development</option>
-                      <option>SEO optimization</option>
-                      <option>Website maintenance and support</option>
-                      <option>Other project</option>
-                    </select>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label htmlFor="contact-message" className="mb-2 block text-xs font-semibold text-slate-700">
-                      Tell us about your project *
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      required
-                      rows={5}
-                      placeholder="What are you looking to build or improve?"
-                      className="form-input resize-y"
-                    />
-                  </div>
+                      <label htmlFor={`contact-${field.name}`} className="mb-2 block text-xs font-semibold text-slate-700">
+                        {field.label}{field.required ? " *" : ""}
+                      </label>
+                      {field.type === "select" ? (
+                        <select
+                          id={`contact-${field.name}`}
+                          name={field.name}
+                          required={field.required}
+                          defaultValue=""
+                          className="form-input"
+                        >
+                          <option value="" disabled>Select an option</option>
+                          {field.options.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                          ))}
+                        </select>
+                      ) : field.type === "textarea" ? (
+                        <textarea
+                          id={`contact-${field.name}`}
+                          name={field.name}
+                          required={field.required}
+                          rows={field.rows || 5}
+                          placeholder={field.placeholder}
+                          className="form-input resize-y"
+                        />
+                      ) : (
+                        <input
+                          id={`contact-${field.name}`}
+                          name={field.name}
+                          type={field.type}
+                          autoComplete={field.autoComplete}
+                          required={field.required}
+                          placeholder={field.placeholder}
+                          className="form-input"
+                        />
+                      )}
+                    </div>
+                  ))}
                 </div>
 
+                {formError && (
+                  <p role="alert" className="mt-4 text-sm text-red-600">
+                    {formError}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-sm font-semibold text-white transition hover:bg-blue-700"
+                  disabled={isSubmitting}
+                  className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Send message <Arrow />
+                  {isSubmitting ? "Sending..." : "Send message"} {!isSubmitting && <Arrow />}
                 </button>
                 <p className="mt-4 text-center text-[10px] leading-5 text-slate-500">
-                  Your message form must be connected to a backend before
-                  launch to deliver enquiries.
+                  Your details will only be used to respond to your enquiry.
                 </p>
               </form>
             )}

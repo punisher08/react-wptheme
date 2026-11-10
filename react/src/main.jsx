@@ -23,6 +23,14 @@ if (routerRoot) {
     createRoot(routerRoot).render(<App />);
 }
 
+const contactRoot = document.getElementById('landingpage-contact-root');
+const contactFormProps = contactRoot
+    ? {
+        fields: JSON.parse(contactRoot.dataset.contactFields),
+        endpoint: contactRoot.dataset.contactEndpoint,
+    }
+    : {};
+
 const pages = [
     {
         id: 'site-header',
@@ -43,6 +51,7 @@ const pages = [
     {
         id: 'landingpage-contact-root',
         Component: ContactSection,
+        props: contactFormProps,
     },
     {
         id: 'landingpage-final-cta-root',
