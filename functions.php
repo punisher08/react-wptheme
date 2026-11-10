@@ -28,27 +28,29 @@ add_action('after_setup_theme', 'prowpdev');
 function prowpdev_enqueue_assets() {
     $theme_version = wp_get_theme()->get('Version');
 
-    wp_enqueue_style(
-        'prowpdev-style',
-        get_template_directory_uri() . '/dist/css/style.css',
-        [],
-        $theme_version
-    );
+    if (!is_page_template('templates/landingpage.php')) {
+        wp_enqueue_style(
+            'prowpdev-style',
+            get_template_directory_uri() . '/dist/css/style.css',
+            [],
+            $theme_version
+        );
 
-    wp_enqueue_style(
-        'prowpdev-tailwind-style',
-        get_template_directory_uri() . '/dist/tailwind.css',
-        [],
-        $theme_version
-    );
+        wp_enqueue_style(
+            'prowpdev-tailwind-style',
+            get_template_directory_uri() . '/dist/tailwind.css',
+            [],
+            $theme_version
+        );
 
-    wp_enqueue_script(
-        'prowpdev-scripts',
-        get_template_directory_uri() . '/dist/js/main.js',
-        [],
-        $theme_version,
-        true
-    );
+        wp_enqueue_script(
+            'prowpdev-scripts',
+            get_template_directory_uri() . '/dist/js/main.js',
+            [],
+            $theme_version,
+            true
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'prowpdev_enqueue_assets');
 

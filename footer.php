@@ -75,47 +75,4 @@
 
 <?php wp_footer(); ?>
 </body>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-  const header = document.getElementById('site-header');
-  const mobileToggle = document.getElementById('mobile-menu-toggle');
-  const mobileDrawer = document.getElementById('mobile-menu-drawer');
-  const hamburgerIcon = document.getElementById('hamburger-icon');
-  const closeIcon = document.getElementById('close-icon');
-
-  // 1. STICKY HEADER ON SCROLL
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      // Classes applied when scrolled down
-      header.classList.remove('bg-transparent', 'py-3');
-      header.classList.add('bg-slate-950/90', 'backdrop-blur-md', 'py-2', 'shadow-md');
-    } else {
-      // Classes applied when sitting at the very top
-      header.classList.remove('bg-slate-950/90', 'backdrop-blur-md', 'py-2', 'shadow-md');
-      header.classList.add('bg-transparent', 'py-3');
-    }
-  });
-
-  // 2. MOBILE MENU TOGGLE DRAWER
-  mobileToggle.addEventListener('click', () => {
-    const isOpen = mobileDrawer.classList.contains('translate-x-0');
-
-    if (isOpen) {
-      // Close Menu
-      mobileDrawer.classList.remove('translate-x-0');
-      mobileDrawer.classList.add('translate-x-full');
-      hamburgerIcon.classList.remove('hidden');
-      closeIcon.classList.add('hidden');
-      document.body.style.overflow = ''; // Re-enable background scrolling
-    } else {
-      // Open Menu
-      mobileDrawer.classList.remove('translate-x-full');
-      mobileDrawer.classList.add('translate-x-0');
-      hamburgerIcon.classList.add('hidden');
-      closeIcon.classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; // Stop background scrolling when menu open
-    }
-  });
-});
-  </script>
 </html>

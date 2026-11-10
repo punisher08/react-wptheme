@@ -17,6 +17,10 @@
 body:has(#react-router-app) > #site-header {
     display: none;
 }
+body:has(#landingpage-react-sections) > hr,
+body:has(#landingpage-react-sections) > .site-footer {
+    display: none;
+}
 
 /* Modern landing page */
 .landingpage {

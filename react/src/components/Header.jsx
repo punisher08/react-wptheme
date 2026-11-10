@@ -14,6 +14,15 @@ import {
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -36,7 +45,7 @@ function Header() {
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 site-header top-0 z-50  backdrop-blur-xl py-3 transition-all duration-300 lg:py-4">
+      <header className={`site-header fixed left-0 right-0 top-0 z-50 backdrop-blur-xl transition-all duration-300 ${scrolled ? "bg-slate-950/90 py-2 shadow-md" : "bg-transparent py-3 lg:py-4"}`}>
       <div className="mx-auto flex min-h-[70px] max-w-[1440px] items-center justify-between gap-6 px-5 sm:px-8 lg:min-h-[78px] lg:px-12">
 
         {/* Logo */}

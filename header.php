@@ -13,4 +13,4 @@ $header = get_field('header','option');
 ?>
 <body <?php body_class(); ?>>
 <header id="site-header"></header>
-<main class="site-main">
+<main class="site-main" id="app">
