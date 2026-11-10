@@ -160,12 +160,12 @@ register_cpt();
     $react_url  = get_template_directory_uri() . '/react/dist';
 
     $js_file = $react_path . '/assets/main.js';
-    $css_file = $react_path . '/assets/style.css';
+    $css_file = $react_path . '/assets/main.css';
 
     if (file_exists($css_file)) {
         wp_enqueue_style(
             'mytheme-react',
-            $react_url . '/assets/style.css',
+            $react_url . '/assets/main.css',
             [],
             filemtime($css_file)
         );
